@@ -48,8 +48,10 @@ class ShowCommand extends ComplexCommandSupport {
                     //
                     value = "method ${value.method}()"
                 }
-
-                io.out.println("  $key = ${InvokerHelper.toString(value)}")
+                def maxlength = Preferences.get("maxlength", "0") as int
+                String v = InvokerHelper.toString(value)
+                if (maxlength < v.length()) {v = v[0.. maxlength]}
+                io.out.println("  $key = $v")
             }
         }
     }
